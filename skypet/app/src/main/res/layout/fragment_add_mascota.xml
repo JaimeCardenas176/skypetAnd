@@ -9,7 +9,7 @@
 
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/addMascota"
         android:layout_width="236dp"
         android:layout_height="42dp"
         android:layout_marginEnd="8dp"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/fotoMascota"
         android:layout_width="88dp"
         android:layout_height="79dp"
         android:layout_marginEnd="8dp"
@@ -31,10 +31,10 @@
         android:src="@drawable/ic_add_a_photo_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/addMascota" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/nombreMascota"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -45,6 +45,44 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/fotoMascota" />
+
+    <EditText
+        android:id="@+id/sexoMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Sexo"
+        app:layout_constraintEnd_toEndOf="@+id/nombreMascota"
+        app:layout_constraintStart_toStartOf="@+id/nombreMascota"
+        app:layout_constraintTop_toBottomOf="@+id/nombreMascota" />
+
+    <EditText
+        android:id="@+id/localizacionMascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Localizacion"
+        app:layout_constraintEnd_toEndOf="@+id/sexoMascota"
+        app:layout_constraintStart_toStartOf="@+id/sexoMascota"
+        app:layout_constraintTop_toBottomOf="@+id/sexoMascota" />
+
+    <ImageButton
+        android:id="@+id/add_mascota"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:src="@android:drawable/ic_menu_add"
+        app:layout_constraintEnd_toEndOf="@+id/localizacionMascota"
+        app:layout_constraintStart_toStartOf="@+id/localizacionMascota"
+        app:layout_constraintTop_toBottomOf="@+id/localizacionMascota" />
 
 </android.support.constraint.ConstraintLayout>

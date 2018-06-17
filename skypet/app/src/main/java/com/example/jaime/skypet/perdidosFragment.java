@@ -1,6 +1,5 @@
 package com.example.jaime.skypet;
 
-import android.app.Service;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -23,14 +22,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class misMascotasFragment extends Fragment {
+/**
+ * A fragment representing a list of Items.
+ * <p/>
+ * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * interface.
+ */
+public class perdidosFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
     // TODO: Customize parameters
     private int mColumnCount = 1;
-    private OnListFragmentInteractionListener mListener;
+    private misMascotasFragment.OnListFragmentInteractionListener mListener;
     Context ctx;
     private String tokenUser;
     private String idUser;
@@ -41,17 +45,16 @@ public class misMascotasFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public misMascotasFragment() {
+    public perdidosFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static misMascotasFragment newInstance(int columnCount, String token, String idUser) {
-        misMascotasFragment fragment = new misMascotasFragment();
+    public static perdidosFragment newInstance(int columnCount, String token) {
+        perdidosFragment fragment = new perdidosFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         args.putString(Const.USER_TOKEN, token);
-        args.putString(Const.USER_ID, idUser);
         fragment.setArguments(args);
         return fragment;
     }
@@ -73,7 +76,6 @@ public class misMascotasFragment extends Fragment {
         Bundle extras = getArguments();
         if(extras!=null){
             tokenUser = extras.getString(Const.USER_TOKEN);
-            idUser = extras.getString(Const.USER_ID);
 
         }
         // Set the adapter
@@ -86,7 +88,7 @@ public class misMascotasFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             ApiSkypet service = ServiceGenerator.createService(ApiSkypet.class);
-            Call<List<Pet>> response = service.mascotasUsuario("Bearer "+tokenUser,idUser);
+            Call<List<Pet>> response = service.mascotasPerdidas("Bearer "+tokenUser);
             response.enqueue(new Callback<List<Pet>>() {
                 @Override
                 public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
@@ -95,7 +97,7 @@ public class misMascotasFragment extends Fragment {
                         if(mascotas.size()!=0){
                             recyclerView.setAdapter(new MymisMascotasRecyclerViewAdapter(mascotas, mListener));
                         }else{
-                            Toast.makeText(ctx, "No existen mascotas aún", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ctx, "No hay mascotas perdidas", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -113,8 +115,8 @@ public class misMascotasFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnListFragmentInteractionListener) {
-            mListener = (OnListFragmentInteractionListener) context;
+        if (context instanceof misMascotasFragment.OnListFragmentInteractionListener) {
+            mListener = (misMascotasFragment.OnListFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnListFragmentInteractionListener");

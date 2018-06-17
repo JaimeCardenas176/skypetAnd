@@ -6,18 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.jaime.skypet.misMascotasFragment.OnListFragmentInteractionListener;
 import com.example.jaime.skypet.models.Pet;
+import com.example.jaime.skypet.perdidosFragment.OnListFragmentInteractionListener;
 
 import java.util.List;
 
 
-public class MymisMascotasRecyclerViewAdapter extends RecyclerView.Adapter<MymisMascotasRecyclerViewAdapter.ViewHolder> {
+public class MyperdidosRecyclerViewAdapter extends RecyclerView.Adapter<MyperdidosRecyclerViewAdapter.ViewHolder> {
 
     private final List<Pet> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MymisMascotasRecyclerViewAdapter(List<Pet> items, OnListFragmentInteractionListener listener) {
+    public MyperdidosRecyclerViewAdapter(List<Pet> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -25,7 +25,7 @@ public class MymisMascotasRecyclerViewAdapter extends RecyclerView.Adapter<Mymis
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_mismascotas, parent, false);
+                .inflate(R.layout.fragment_perdidos, parent, false);
         return new ViewHolder(view);
     }
 
@@ -73,7 +73,7 @@ public class MymisMascotasRecyclerViewAdapter extends RecyclerView.Adapter<Mymis
 
         @Override
         public String toString() {
-            return super.toString() + " '" + mNombre.getText() + "'";
+            return super.toString() + " '" + mItem.getName() + " '";
         }
     }
 }

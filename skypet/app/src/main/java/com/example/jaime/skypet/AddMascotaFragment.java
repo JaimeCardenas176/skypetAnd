@@ -7,6 +7,20 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.jaime.skypet.API.ApiSkypet;
+import com.example.jaime.skypet.API.ServiceGenerator;
+import com.example.jaime.skypet.models.Pet;
+import com.example.jaime.skypet.utils.Const;
+
+import java.util.Date;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -20,33 +34,21 @@ import android.view.ViewGroup;
 public class AddMascotaFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    EditText editNombre, editSex, editLoc;
+    String nombre , sexo, localizacion, tokenUser, IdUser;
+    Button add;
+    Context ctx;
     private OnFragmentInteractionListener mListener;
 
     public AddMascotaFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AddMascotaFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static AddMascotaFragment newInstance(String param1, String param2) {
+    public static AddMascotaFragment newInstance(String token, String id) {
         AddMascotaFragment fragment = new AddMascotaFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(Const.USER_TOKEN, token);
+        args.putString(Const.USER_ID, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +57,8 @@ public class AddMascotaFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            tokenUser = getArguments().getString(Const.USER_TOKEN);
+            IdUser = getArguments().getString(Const.USER_ID);
         }
     }
 
@@ -64,7 +66,51 @@ public class AddMascotaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_mascota, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_mascota, container, false);
+        Bundle extras = getArguments();
+        if(extras!=null){
+            tokenUser = extras.getString(Const.USER_TOKEN);
+            IdUser = extras.getString(Const.USER_ID);
+        }
+
+        ctx= getContext();
+        editNombre = view.findViewById(R.id.nombreMascota);
+        editSex = view.findViewById(R.id.sexoMascota);
+        editLoc = view.findViewById(R.id.localizacionMascota);
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                nombre = editNombre.getText().toString();
+                sexo = editSex.getText().toString();
+                localizacion = editLoc.getText().toString();
+
+                if("".equals(nombre) || "".equals(sexo) || "".equals(localizacion)){
+                    Toast.makeText(ctx, "Introduzca los datos necesarios", Toast.LENGTH_SHORT).show();
+                }else{
+                    ApiSkypet servicio = ServiceGenerator.createService(ApiSkypet.class);
+                    Pet pet = new Pet(nombre, sexo, IdUser, 0, localizacion, new Date(),null);
+                    Call<Pet> response = servicio.addPet(pet);
+
+                    response.enqueue(new Callback<Pet>() {
+                        @Override
+                        public void onResponse(Call<Pet> call, Response<Pet> response) {
+                            if(response.isSuccessful()){
+                                Toast.makeText(ctx, "mascota añadida con éxito", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Pet> call, Throwable t) {
+                            Toast.makeText(ctx, "Se ha producido un error inesperado", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -91,16 +137,6 @@ public class AddMascotaFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

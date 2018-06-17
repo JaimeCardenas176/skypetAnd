@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import com.example.jaime.skypet.API.ApiSkypet;
 import com.example.jaime.skypet.API.ServiceGenerator;
+import com.example.jaime.skypet.dummy.DummyContent;
+import com.example.jaime.skypet.dummy.DummyContent.DummyItem;
 import com.example.jaime.skypet.models.Pet;
 import com.example.jaime.skypet.utils.Const;
 
@@ -21,7 +24,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class perdidosFragment extends Fragment {
+/**
+ * A fragment representing a list of Items.
+ * <p/>
+ * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
+ * interface.
+ */
+public class EncontradosFragment extends Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
@@ -38,13 +47,13 @@ public class perdidosFragment extends Fragment {
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public perdidosFragment() {
+    public EncontradosFragment() {
     }
 
     // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
-    public static perdidosFragment newInstance(int columnCount, String token) {
-        perdidosFragment fragment = new perdidosFragment();
+    public static EncontradosFragment newInstance(int columnCount, String token) {
+        EncontradosFragment fragment = new EncontradosFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_COLUMN_COUNT, columnCount);
         args.putString(Const.USER_TOKEN, token);
@@ -81,7 +90,7 @@ public class perdidosFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
             ApiSkypet service = ServiceGenerator.createService(ApiSkypet.class);
-            Call<List<Pet>> response = service.mascotasPerdidas("Bearer "+tokenUser);
+            Call<List<Pet>> response = service.mascotasEncontradas("Bearer "+tokenUser);
             response.enqueue(new Callback<List<Pet>>() {
                 @Override
                 public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
@@ -90,7 +99,7 @@ public class perdidosFragment extends Fragment {
                         if(mascotas.size()!=0){
                             recyclerView.setAdapter(new MymisMascotasRecyclerViewAdapter(mascotas, mListener));
                         }else{
-                            Toast.makeText(ctx, "No hay mascotas perdidas", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ctx, "No hay mascotas encontradas", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

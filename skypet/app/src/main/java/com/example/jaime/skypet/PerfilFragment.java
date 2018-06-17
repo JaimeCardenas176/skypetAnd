@@ -22,16 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link PerfilFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link PerfilFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class PerfilFragment extends Fragment {
+public class PerfilFragment extends android.support.v4.app.Fragment {
     TextView nombre, apellidos, email, direccion, telefono, numMascotas;
     String token , idUser;
     Integer longitudLista;

@@ -14,14 +14,13 @@ import com.example.jaime.skypet.API.ApiSkypet;
 import com.example.jaime.skypet.API.ServiceGenerator;
 import com.example.jaime.skypet.models.Pet;
 import com.example.jaime.skypet.utils.Const;
-
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class perdidosFragment extends Fragment {
+public class perdidosFragment extends android.support.v4.app.Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";

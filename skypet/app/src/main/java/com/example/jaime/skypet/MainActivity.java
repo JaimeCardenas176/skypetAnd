@@ -3,6 +3,8 @@ package com.example.jaime.skypet;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,15 +15,34 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.jaime.skypet.utils.Const;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+        String token, idUser, nombreUser, emailUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle extras = getIntent().getExtras();
+        idUser = extras.getString(Const.USER_ID);
+        token = extras.getString(Const.USER_TOKEN);
+        nombreUser = extras.getString(Const.USER_NAME);
+        emailUser = extras.getString(Const.USER_EMAIL);
+        Bundle arg = new Bundle();
+        arg.putString(token, "token");
+        arg.putString(idUser,"id");
+
+        Fragment f = new PerfilFragment();
+        f.setArguments(arg);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.contenedor, f)
+                .commit();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -79,15 +100,39 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Bundle arg = new Bundle();
+        arg.putString("token", token);
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Fragment f = new PerfilFragment();
+            f.setArguments(arg);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.contenedor, f)
+                    .commit();
+
         } else if (id == R.id.nav_gallery) {
-
+            Fragment f = new misMascotasFragment();
+            f.setArguments(arg);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.contenedor, f)
+                    .commit();
         } else if (id == R.id.nav_slideshow) {
-
+            Fragment f = new perdidosFragment();
+            f.setArguments(arg);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.contenedor, f)
+                    .commit();
         } else if (id == R.id.nav_manage) {
-
+            Fragment f = new EncontradosFragment();
+            f.setArguments(arg);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.contenedor, f)
+                    .commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

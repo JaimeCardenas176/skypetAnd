@@ -13,8 +13,6 @@ import android.widget.Toast;
 
 import com.example.jaime.skypet.API.ApiSkypet;
 import com.example.jaime.skypet.API.ServiceGenerator;
-import com.example.jaime.skypet.dummy.DummyContent;
-import com.example.jaime.skypet.dummy.DummyContent.DummyItem;
 import com.example.jaime.skypet.models.Pet;
 import com.example.jaime.skypet.utils.Const;
 
@@ -24,13 +22,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A fragment representing a list of Items.
- * <p/>
- * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
- * interface.
- */
-public class EncontradosFragment extends Fragment {
+
+public class EncontradosFragment extends android.support.v4.app.Fragment {
 
     // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";

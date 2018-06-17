@@ -23,15 +23,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AddMascotaFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AddMascotaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class AddMascotaFragment extends Fragment {
+
+public class AddMascotaFragment extends android.support.v4.app.Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     EditText editNombre, editSex, editLoc;

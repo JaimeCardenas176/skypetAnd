@@ -1,13 +1,90 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.jaime.skypet.PerfilFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
-</FrameLayout>
+
+    <ImageView
+        android:id="@+id/icono"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:src="@drawable/ic_person_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/nombreUsuario"
+        android:layout_width="135dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toEndOf="@+id/icono"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/apellidosUsuario"
+        android:layout_width="135dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="16dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/nombreUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/nombreUsuario" />
+
+    <TextView
+        android:id="@+id/emailUsuario"
+        android:layout_width="200dp"
+        android:layout_height="33dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:text="TextView"
+        app:layout_constraintEnd_toEndOf="@+id/apellidosUsuario"
+        app:layout_constraintStart_toStartOf="@+id/icono"
+        app:layout_constraintTop_toBottomOf="@+id/icono" />
+
+    <TextView
+        android:id="@+id/direccionUsuario"
+        android:layout_width="200dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/emailUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/emailUsuario" />
+
+    <TextView
+        android:id="@+id/telefonoUsuario"
+        android:layout_width="200dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/direccionUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/direccionUsuario" />
+
+    <TextView
+        android:id="@+id/numeroMascotas"
+        android:layout_width="200dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="28dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/telefonoUsuario"
+        app:layout_constraintTop_toBottomOf="@+id/telefonoUsuario" />
+
+    <!--<ImageButton
+        android:id="@+id/editarUsuario"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:src="@android:drawable/ic_menu_edit"
+        app:layout_constraintEnd_toEndOf="@+id/numeroMascotas"
+        app:layout_constraintTop_toBottomOf="@+id/numeroMascotas" />-->
+</android.support.constraint.ConstraintLayout>

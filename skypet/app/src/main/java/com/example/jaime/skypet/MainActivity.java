@@ -111,7 +111,6 @@ public class MainActivity extends AppCompatActivity
                     .beginTransaction()
                     .add(R.id.contenedor, f)
                     .commit();
-
         } else if (id == R.id.nav_gallery) {
             Fragment f = new misMascotasFragment();
             f.setArguments(arg);
